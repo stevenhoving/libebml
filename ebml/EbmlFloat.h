@@ -94,9 +94,9 @@ class EBML_DLL_API EbmlFloat : public EbmlElement {
     }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     double Value; /// The actual value of the element
     double DefaultValue;

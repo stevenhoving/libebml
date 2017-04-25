@@ -81,7 +81,7 @@ class EbmlElement;
 extern const EbmlSemanticContext Context_EbmlGlobal;
 
 #define DEFINE_xxx_CONTEXT(x,global) \
-    const EbmlSemanticContext Context_##x = EbmlSemanticContext(countof(ContextList_##x), ContextList_##x, NULL, global, NULL); \
+    const EbmlSemanticContext Context_##x = EbmlSemanticContext(countof(ContextList_##x), ContextList_##x, NULL, global, NULL);
 
 #define DEFINE_xxx_MASTER(x,id,idl,parent,name,global) \
     const EbmlId Id_##x    (id, idl); \
@@ -97,7 +97,7 @@ extern const EbmlSemanticContext Context_EbmlGlobal;
 #define DEFINE_xxx_MASTER_ORPHAN(x,id,idl,name,global) \
     const EbmlId Id_##x    (id, idl); \
     const EbmlSemanticContext Context_##x = EbmlSemanticContext(countof(ContextList_##x), ContextList_##x, NULL, global, &EBML_INFO(x)); \
-    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_##x); \
+    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_##x);
 
 #define DEFINE_xxx_CLASS(x,id,idl,parent,name,global) \
     const EbmlId Id_##x    (id, idl); \
@@ -136,12 +136,12 @@ extern const EbmlSemanticContext Context_EbmlGlobal;
 
 #define DEFINE_xxx_CLASS_GLOBAL(x,id,idl,name,global) \
     const EbmlId Id_##x    (id, idl); \
-    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_EbmlGlobal); \
+    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_EbmlGlobal);
 
 #define DEFINE_xxx_CLASS_ORPHAN(x,id,idl,name,global) \
     const EbmlId Id_##x    (id, idl); \
     const EbmlSemanticContext Context_##x = EbmlSemanticContext(0, NULL, NULL, global, NULL); \
-    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_##x); \
+    const EbmlCallbacks x::ClassInfos(x::Create, Id_##x, name, Context_##x);
 
 #define DEFINE_EBML_CONTEXT(x)                             DEFINE_xxx_CONTEXT(x,*GetEbmlGlobal_Context)
 #define DEFINE_EBML_MASTER(x,id,idl,parent,name)           DEFINE_xxx_MASTER(x,id,idl,parent,name,*GetEbmlGlobal_Context)
@@ -173,28 +173,28 @@ extern const EbmlSemanticContext Context_EbmlGlobal;
 
 #if defined(EBML_STRICT_API)
 #define EBML_CONCRETE_CLASS(Type) \
-    public: \
-        virtual const EbmlSemanticContext &Context() const {return ClassInfos.GetContext();} \
-        virtual const char *DebugName() const {return ClassInfos.GetName();} \
+  public: \
+    virtual const EbmlSemanticContext &Context() const {return ClassInfos.GetContext();} \
+    virtual const char *DebugName() const {return ClassInfos.GetName();} \
     virtual operator const EbmlId &() const {return ClassInfos.ClassId();} \
-        virtual EbmlElement & CreateElement() const {return Create();} \
-        virtual EbmlElement * Clone() const { return new Type(*this); } \
+    virtual EbmlElement & CreateElement() const {return Create();} \
+    virtual EbmlElement * Clone() const { return new Type(*this); } \
     static EbmlElement & Create() {return *(new Type);} \
-        static const EbmlCallbacks & ClassInfo() {return ClassInfos;} \
-        static const EbmlId & ClassId() {return ClassInfos.ClassId();} \
-    private: \
-    static const EbmlCallbacks ClassInfos; \
+    static const EbmlCallbacks & ClassInfo() {return ClassInfos;} \
+    static const EbmlId & ClassId() {return ClassInfos.ClassId();} \
+  private: \
+    static const EbmlCallbacks ClassInfos;
 
 #define EBML_CONCRETE_DUMMY_CLASS(Type) \
-    public: \
-        virtual const EbmlSemanticContext &Context() const {return *static_cast<EbmlSemanticContext*>(NULL);} \
-        virtual const char *DebugName() const {return "DummyElement";} \
+  public: \
+    virtual const EbmlSemanticContext &Context() const {return *static_cast<EbmlSemanticContext*>(NULL);} \
+    virtual const char *DebugName() const {return "DummyElement";} \
     virtual operator const EbmlId &(); \
-        virtual EbmlElement & CreateElement() const {return Create();} \
-        virtual EbmlElement * Clone() const { return new Type(*this); } \
-    static EbmlElement & Create() {return *(new Type);} \
-        static const EbmlId & ClassId(); \
-    static const EbmlCallbacks ClassInfos; \
+    virtual EbmlElement & CreateElement() const {return Create();} \
+    virtual EbmlElement * Clone() const { return new Type(*this); } \
+  static EbmlElement & Create() {return *(new Type);} \
+    static const EbmlId & ClassId(); \
+    static const EbmlCallbacks ClassInfos;
 
 
 #define EBML_INFO(ref)             ref::ClassInfo()
@@ -202,42 +202,42 @@ extern const EbmlSemanticContext Context_EbmlGlobal;
 #define EBML_CLASS_SEMCONTEXT(ref) Context_##ref
 #define EBML_CLASS_CONTEXT(ref)    ref::ClassInfo().GetContext()
 #define EBML_CLASS_CALLBACK(ref)   ref::ClassInfo()
-#define EBML_CONTEXT(e) (e)->Context()
-#define EBML_NAME(e)    (e)->DebugName()
+#define EBML_CONTEXT(e)         (e)->Context()
+#define EBML_NAME(e)            (e)->DebugName()
 
-#define EBML_INFO_ID(cb)      (cb).ClassId()
-#define EBML_INFO_NAME(cb)    (cb).GetName()
-#define EBML_INFO_CREATE(cb)  (cb).NewElement()
-#define EBML_INFO_CONTEXT(cb) (cb).GetContext()
+#define EBML_INFO_ID(cb)        (cb).ClassId()
+#define EBML_INFO_NAME(cb)      (cb).GetName()
+#define EBML_INFO_CREATE(cb)    (cb).NewElement()
+#define EBML_INFO_CONTEXT(cb)   (cb).GetContext()
 
-#define EBML_SEM_UNIQUE(s)  (s).IsUnique()
-#define EBML_SEM_CONTEXT(s) ((const EbmlCallbacks &)(s)).GetContext()
-#define EBML_SEM_CREATE(s)  (s).Create()
+#define EBML_SEM_UNIQUE(s)      (s).IsUnique()
+#define EBML_SEM_CONTEXT(s)     ((const EbmlCallbacks &)(s)).GetContext()
+#define EBML_SEM_CREATE(s)      (s).Create()
 
-#define EBML_CTX_SIZE(c)       (c).GetSize()
-#define EBML_CTX_MASTER(c)     (c).GetMaster()
-#define EBML_CTX_PARENT(c)     (c).Parent()
-#define EBML_CTX_IDX(c,i)      (c).GetSemantic(i)
-#define EBML_CTX_IDX_INFO(c,i) (const EbmlCallbacks &)((c).GetSemantic(i))
-#define EBML_CTX_IDX_ID(c,i)   ((const EbmlCallbacks &)((c).GetSemantic(i))).ClassId()
+#define EBML_CTX_SIZE(c)        (c).GetSize()
+#define EBML_CTX_MASTER(c)      (c).GetMaster()
+#define EBML_CTX_PARENT(c)      (c).Parent()
+#define EBML_CTX_IDX(c,i)       (c).GetSemantic(i)
+#define EBML_CTX_IDX_INFO(c,i)  (const EbmlCallbacks &)((c).GetSemantic(i))
+#define EBML_CTX_IDX_ID(c,i)    ((const EbmlCallbacks &)((c).GetSemantic(i))).ClassId()
 #else
 #define EBML_CONCRETE_CLASS(Type) \
-    public: \
-    virtual const EbmlCallbacks & Generic() const {return ClassInfos;} \
-    virtual operator const EbmlId &() const {return ClassInfos.GlobalId;} \
-        virtual EbmlElement & CreateElement() const {return Create();} \
-        virtual EbmlElement * Clone() const { return new Type(*this); } \
-    static EbmlElement & Create() {return *(new Type);} \
-    static const EbmlCallbacks ClassInfos; \
+  public: \
+    virtual const libebml::EbmlCallbacks & Generic() const {return ClassInfos;} \
+    virtual operator const libebml::EbmlId &() const {return ClassInfos.GlobalId;} \
+    virtual libebml::EbmlElement & CreateElement() const {return Create();} \
+    virtual libebml::EbmlElement * Clone() const { return new Type(*this); } \
+    static libebml::EbmlElement & Create() {return *(new Type);} \
+    static const libebml::EbmlCallbacks ClassInfos;
 
 #define EBML_CONCRETE_DUMMY_CLASS(Type) \
-    public: \
-    virtual const EbmlCallbacks & Generic() const {return ClassInfos;} \
-    virtual operator const EbmlId &(); \
-        virtual EbmlElement & CreateElement() const {return Create();} \
-        virtual EbmlElement * Clone() const { return new Type(*this); } \
-    static EbmlElement & Create() {return *(new Type);} \
-    static const EbmlCallbacks ClassInfos; \
+  public: \
+    virtual const libebml::EbmlCallbacks & Generic() const {return ClassInfos;} \
+    virtual operator const libebml::EbmlId &(); \
+    virtual libebml::EbmlElement & CreateElement() const {return Create();} \
+    virtual libebml::EbmlElement * Clone() const { return new Type(*this); } \
+    static libebml::EbmlElement & Create() {return *(new Type);} \
+    static const libebml::EbmlCallbacks ClassInfos;
 
 
 #define EBML_INFO(ref)             ref::ClassInfos
@@ -248,26 +248,26 @@ extern const EbmlSemanticContext Context_EbmlGlobal;
 #define EBML_CONTEXT(e)            (e)->Generic().Context
 #define EBML_NAME(e)               (e)->Generic().DebugName
 
-#define EBML_INFO_ID(cb)      (cb).GlobalId
-#define EBML_INFO_NAME(cb)    (cb).DebugName
-#define EBML_INFO_CREATE(cb)  (cb).Create()
-#define EBML_INFO_CONTEXT(cb) (cb).Context
+#define EBML_INFO_ID(cb)        (cb).GlobalId
+#define EBML_INFO_NAME(cb)      (cb).DebugName
+#define EBML_INFO_CREATE(cb)    (cb).Create()
+#define EBML_INFO_CONTEXT(cb)   (cb).Context
 
-#define EBML_SEM_UNIQUE(s)  (s).Unique
-#define EBML_SEM_CONTEXT(s) (s).GetCallbacks.Context
-#define EBML_SEM_CREATE(s)  (s).Create()
+#define EBML_SEM_UNIQUE(s)      (s).Unique
+#define EBML_SEM_CONTEXT(s)     (s).GetCallbacks.Context
+#define EBML_SEM_CREATE(s)      (s).Create()
 
-#define EBML_CTX_SIZE(c)       (c).Size
-#define EBML_CTX_MASTER(c)     (c).MasterElt
-#define EBML_CTX_PARENT(c)     (c).UpTable
-#define EBML_CTX_IDX(c,i)      (c).MyTable[(i)]
-#define EBML_CTX_IDX_INFO(c,i) (c).MyTable[(i)].GetCallbacks
-#define EBML_CTX_IDX_ID(c,i)   (c).MyTable[(i)].GetCallbacks.GlobalId
-#endif
+#define EBML_CTX_SIZE(c)        (c).Size
+#define EBML_CTX_MASTER(c)      (c).MasterElt
+#define EBML_CTX_PARENT(c)      (c).UpTable
+#define EBML_CTX_IDX(c,i)       (c).MyTable[(i)]
+#define EBML_CTX_IDX_INFO(c,i)  (c).MyTable[(i)].GetCallbacks
+#define EBML_CTX_IDX_ID(c,i)    (c).MyTable[(i)].GetCallbacks.GlobalId
+#endif // defined(EBML_STRICT_API)
 
 #if !defined(INVALID_FILEPOS_T)
 #define INVALID_FILEPOS_T 0
-#endif
+#endif // !defined(INVALID_FILEPOS_T)
 
 #define EBML_DEF_CONS
 #define EBML_DEF_SEP
@@ -288,13 +288,13 @@ class EBML_DLL_API EbmlCallbacks {
   public:
     EbmlCallbacks(EbmlElement & (*Creator)(), const EbmlId & aGlobalId, const char * aDebugName, const EbmlSemanticContext & aContext);
 
-        inline const EbmlId & ClassId() const { return GlobalId; }
-        inline const EbmlSemanticContext & GetContext() const { return Context; }
-        inline const char * GetName() const { return DebugName; }
-        inline EbmlElement & NewElement() const { return Create(); }
+    inline const EbmlId & ClassId() const { return GlobalId; }
+    inline const EbmlSemanticContext & GetContext() const { return Context; }
+    inline const char * GetName() const { return DebugName; }
+    inline EbmlElement & NewElement() const { return Create(); }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #endif
     EbmlElement & (*Create)();
     const EbmlId & GlobalId;
@@ -311,13 +311,13 @@ class EBML_DLL_API EbmlSemantic {
     EbmlSemantic(bool aMandatory, bool aUnique, const EbmlCallbacks & aGetCallbacks)
       :Mandatory(aMandatory), Unique(aUnique), GetCallbacks(aGetCallbacks) {}
 
-        inline bool IsMandatory() const { return Mandatory; }
-        inline bool IsUnique() const { return Unique; }
-        inline EbmlElement & Create() const { return EBML_INFO_CREATE(GetCallbacks); }
-        inline operator const EbmlCallbacks &() const { return GetCallbacks; }
+    inline bool IsMandatory() const { return Mandatory; }
+    inline bool IsUnique() const { return Unique; }
+    inline EbmlElement & Create() const { return EBML_INFO_CREATE(GetCallbacks); }
+    inline operator const EbmlCallbacks &() const { return GetCallbacks; }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #endif
     bool Mandatory; ///< wether the element is mandatory in the context or not
     bool Unique;
@@ -346,17 +346,17 @@ class EBML_DLL_API EbmlSemanticContext {
         (MasterElt != aElt.MasterElt));
     }
 
-        inline size_t GetSize() const { return Size; }
-        inline const EbmlCallbacks* GetMaster() const { return MasterElt; }
-        inline const EbmlSemanticContext* Parent() const { return UpTable; }
-        const EbmlSemantic & GetSemantic(size_t i) const;
+    inline size_t GetSize() const { return Size; }
+    inline const EbmlCallbacks* GetMaster() const { return MasterElt; }
+    inline const EbmlSemanticContext* Parent() const { return UpTable; }
+    const EbmlSemantic & GetSemantic(size_t i) const;
 
     const _GetSemanticContext GetGlobalContext; ///< global elements supported at this level
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #endif
-        const EbmlSemantic *MyTable; ///< First element in the table
+    const EbmlSemantic *MyTable; ///< First element in the table
     size_t Size;          ///< number of elements in the table
     const EbmlSemanticContext *UpTable; ///< Parent element
     /// \todo replace with the global context directly
@@ -394,13 +394,13 @@ class EBML_DLL_API EbmlElement {
 
     virtual operator const EbmlId &() const = 0;
 #if defined(EBML_STRICT_API)
-        virtual const char *DebugName() const = 0;
-        virtual const EbmlSemanticContext &Context() const = 0;
+    virtual const char *DebugName() const = 0;
+    virtual const EbmlSemanticContext &Context() const = 0;
 #else
     /// return the generic callback to monitor a derived class
     virtual const EbmlCallbacks & Generic() const = 0;
 #endif
-        virtual EbmlElement & CreateElement() const = 0;
+    virtual EbmlElement & CreateElement() const = 0;
 
     // by default only allow to set element as finite (override when needed)
     virtual bool SetSizeInfinite(bool bIsInfinite = true) {return !bIsInfinite;}
@@ -486,12 +486,12 @@ class EBML_DLL_API EbmlElement {
     */
     EbmlElement(const EbmlElement & ElementToClone);
 
-        inline uint64 GetDefaultSize() const {return DefaultSize;}
-        inline void SetSize_(uint64 aSize) {Size = aSize;}
-        inline void SetValueIsSet(bool Set = true) {bValueIsSet = Set;}
-        inline void SetDefaultIsSet(bool Set = true) {DefaultIsSet = Set;}
-        inline void SetSizeIsFinite(bool Set = true) {bSizeIsFinite = Set;}
-        inline uint64 GetSizePosition() const {return SizePosition;}
+    inline uint64 GetDefaultSize() const {return DefaultSize;}
+    inline void SetSize_(uint64 aSize) {Size = aSize;}
+    inline void SetValueIsSet(bool Set = true) {bValueIsSet = Set;}
+    inline void SetDefaultIsSet(bool Set = true) {DefaultIsSet = Set;}
+    inline void SetSizeIsFinite(bool Set = true) {bSizeIsFinite = Set;}
+    inline uint64 GetSizePosition() const {return SizePosition;}
 
 #if defined(EBML_STRICT_API)
   private:

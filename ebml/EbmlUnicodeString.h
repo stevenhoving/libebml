@@ -51,44 +51,44 @@ START_LIBEBML_NAMESPACE
   \note inspired by wstring which is not available everywhere
 */
 class EBML_DLL_API UTFstring {
-public:
-  typedef wchar_t value_type;
+  public:
+    typedef wchar_t value_type;
 
-  UTFstring();
-  UTFstring(const wchar_t *); // should be NULL terminated
-  UTFstring(const UTFstring &);
-  UTFstring(std::wstring const &);
+    UTFstring();
+    UTFstring(const wchar_t *); // should be NULL terminated
+    UTFstring(const UTFstring &);
+    UTFstring(std::wstring const &);
 
-  virtual ~UTFstring();
-  bool operator==(const UTFstring&) const;
-  inline bool operator!=(const UTFstring &cmp) const
-  {
-    return !(*this == cmp);
-  }
-  UTFstring & operator=(const UTFstring &);
-  UTFstring & operator=(const wchar_t *);
-  UTFstring & operator=(wchar_t);
+    virtual ~UTFstring();
+    bool operator==(const UTFstring&) const;
+    inline bool operator!=(const UTFstring &cmp) const
+    {
+        return !(*this == cmp);
+    }
+    UTFstring & operator=(const UTFstring &);
+    UTFstring & operator=(const wchar_t *);
+    UTFstring & operator=(wchar_t);
 
-  /// Return length of string
-  size_t length() const {return _Length;}
+    /// Return length of string
+    size_t length() const {return _Length;}
 
-  operator const wchar_t*() const;
-  const wchar_t* c_str() const {return _Data;}
+    operator const wchar_t*() const;
+    const wchar_t* c_str() const {return _Data;}
 
-  const std::string & GetUTF8() const {return UTF8string;}
-  void SetUTF8(const std::string &);
+    const std::string & GetUTF8() const {return UTF8string;}
+    void SetUTF8(const std::string &);
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
-  size_t _Length; ///< length of the UCS string excluding the \0
-  wchar_t* _Data; ///< internal UCS representation
-  std::string UTF8string;
-  static bool wcscmp_internal(const wchar_t *str1, const wchar_t *str2);
-  void UpdateFromUTF8();
-  void UpdateFromUCS2();
+    size_t _Length; ///< length of the UCS string excluding the \0
+    wchar_t* _Data; ///< internal UCS representation
+    std::string UTF8string;
+    static bool wcscmp_internal(const wchar_t *str1, const wchar_t *str2);
+    void UpdateFromUTF8();
+    void UpdateFromUCS2();
 };
 
 
@@ -127,9 +127,9 @@ class EBML_DLL_API EbmlUnicodeString : public EbmlElement {
     }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     UTFstring Value; /// The actual value of the element
     UTFstring DefaultValue;

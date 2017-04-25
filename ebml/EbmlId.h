@@ -84,11 +84,11 @@ class EBML_DLL_API EbmlId {
       }
     }
 
-        inline size_t GetLength() const { return Length; }
-        inline uint32 GetValue() const { return Value; }
+    inline size_t GetLength() const { return Length; }
+    inline uint32 GetValue() const { return Value; }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #endif
     uint32 Value;
     size_t Length;

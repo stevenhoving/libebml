@@ -86,9 +86,9 @@ DECLARE_EBML_BINARY(EbmlCrc32)
     void ForceCrc32(uint32 NewValue) { m_crc_final = NewValue; SetValueIsSet();}
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     void ResetCRC();
     void UpdateByte(binary b);
@@ -97,11 +97,11 @@ DECLARE_EBML_BINARY(EbmlCrc32)
     uint32 m_crc;
     uint32 m_crc_final;
 
-        EBML_CONCRETE_CLASS(EbmlCrc32)
+    EBML_CONCRETE_CLASS(EbmlCrc32)
 };
 
 template <class T>
-inline unsigned int GetAlignment(T */* dummy */=NULL) // VC60 workaround
+inline unsigned int GetAlignment(T * /* dummy */ = NULL) // VC60 workaround
 {
 #if defined(_MSC_VER) && (_MSC_VER >= 1300)
   return __alignof(T);
@@ -131,7 +131,7 @@ inline bool IsAlignedOn(const void *p, unsigned int alignment)
 }
 
 template <class T>
-inline bool IsAligned(const void *p, T */* dummy */=NULL)  // VC60 workaround
+inline bool IsAligned(const void *p, T * /* dummy */ = NULL)  // VC60 workaround
 {
   return IsAlignedOn(p, GetAlignment<T>());
 }

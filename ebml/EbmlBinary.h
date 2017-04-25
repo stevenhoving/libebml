@@ -52,8 +52,8 @@
 START_LIBEBML_NAMESPACE
 
 /*!
-    \class EbmlBinary
-    \brief Handle all operations on an EBML element that contains "unknown" binary data
+  \class EbmlBinary
+  \brief Handle all operations on an EBML element that contains "unknown" binary data
 
   \todo handle fix sized elements (like UID of CodecID)
 */

@@ -84,9 +84,9 @@ class EBML_DLL_API EbmlDate : public EbmlElement {
     }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     filepos_t RenderData(IOCallback & output, bool bForceRender, bool bWithDefault = false);
 

@@ -49,19 +49,19 @@ class EBML_DLL_API EbmlDummy : public EbmlBinary {
     bool IsDummy() const {return true;}
     bool IsDefaultValue() const {return true;}
 
-        virtual operator const EbmlId &() const {
-            return DummyId;
-        }
+    virtual operator const EbmlId &() const {
+        return DummyId;
+    }
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     const EbmlId DummyId;
     static const EbmlId DummyRawId;
 
-        EBML_CONCRETE_DUMMY_CLASS(EbmlDummy)
+    EBML_CONCRETE_DUMMY_CLASS(EbmlDummy)
 };
 
 END_LIBEBML_NAMESPACE

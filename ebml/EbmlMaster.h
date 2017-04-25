@@ -62,7 +62,7 @@ class EBML_DLL_API EbmlMaster : public EbmlElement {
     EbmlMaster(const EbmlMaster & ElementToClone);
     virtual bool ValidateSize() const {return true;}
     /*!
-      \warning be carefull to clear the memory allocated in the ElementList elsewhere
+      \warning be careful to clear the memory allocated in the ElementList elsewhere
     */
     virtual ~EbmlMaster();
 
@@ -71,14 +71,14 @@ class EBML_DLL_API EbmlMaster : public EbmlElement {
     filepos_t UpdateSize(bool bWithDefault = false, bool bForceRender = false);
 
     /*!
-      \brief Set wether the size is finite (size is known in advance when writing, or infinite size is not known on writing)
+      \brief Set whether the size is finite (size is known in advance when writing, or infinite size is not known on writing)
     */
     bool SetSizeInfinite(bool aIsInfinite = true) {SetSizeIsFinite(!aIsInfinite); return true;}
 
     bool PushElement(EbmlElement & element);
     uint64 GetSize() const {
       if (IsFiniteSize())
-                return EbmlElement::GetSize();
+        return EbmlElement::GetSize();
       else
         return (0-1);
     }
@@ -124,14 +124,14 @@ class EBML_DLL_API EbmlMaster : public EbmlElement {
     std::vector<EbmlElement *> const &GetElementList() const {return ElementList;}
     std::vector<EbmlElement *> &GetElementList() {return ElementList;}
 
-        inline EBML_MASTER_ITERATOR begin() {return ElementList.begin();}
-        inline EBML_MASTER_ITERATOR end() {return ElementList.end();}
-        inline EBML_MASTER_RITERATOR rbegin() {return ElementList.rbegin();}
-        inline EBML_MASTER_RITERATOR rend() {return ElementList.rend();}
-        inline EBML_MASTER_CONST_ITERATOR begin() const {return ElementList.begin();}
-        inline EBML_MASTER_CONST_ITERATOR end() const {return ElementList.end();}
-        inline EBML_MASTER_CONST_RITERATOR rbegin() const {return ElementList.rbegin();}
-        inline EBML_MASTER_CONST_RITERATOR rend() const {return ElementList.rend();}
+    inline EBML_MASTER_ITERATOR begin() {return ElementList.begin();}
+    inline EBML_MASTER_ITERATOR end() {return ElementList.end();}
+    inline EBML_MASTER_RITERATOR rbegin() {return ElementList.rbegin();}
+    inline EBML_MASTER_RITERATOR rend() {return ElementList.rend();}
+    inline EBML_MASTER_CONST_ITERATOR begin() const {return ElementList.begin();}
+    inline EBML_MASTER_CONST_ITERATOR end() const {return ElementList.end();}
+    inline EBML_MASTER_CONST_RITERATOR rbegin() const {return ElementList.rbegin();}
+    inline EBML_MASTER_CONST_RITERATOR rend() const {return ElementList.rend();}
 
     EbmlElement * operator[](unsigned int position) {return ElementList[position];}
     const EbmlElement * operator[](unsigned int position) const {return ElementList[position];}
@@ -179,9 +179,9 @@ class EBML_DLL_API EbmlMaster : public EbmlElement {
     std::vector<std::string> FindAllMissingElements();
 
 #if defined(EBML_STRICT_API)
-    private:
+  private:
 #else
-    protected:
+  protected:
 #endif
     std::vector<EbmlElement *> ElementList;
 
