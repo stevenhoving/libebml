@@ -100,7 +100,7 @@ protected:
 
   binary *dataBuffer;
   /*!
-    Postion where we start 'writing' to the dataBuffer
+    Position where we start 'writing' to the dataBuffer
   */
   uint64 dataBufferPos;
   /*!
