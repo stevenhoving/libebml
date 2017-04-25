@@ -211,9 +211,7 @@ filepos_t EbmlCrc32::RenderData(IOCallback & output, bool /* bForceRender */, bo
 {
   filepos_t Result = 4;
 
-  if (Result != 0) {
-    output.writeFully(&m_crc_final, Result);
-  }
+  output.writeFully(&m_crc_final, Result);
 
   if (Result < GetDefaultSize()) {
     // pad the rest with 0
