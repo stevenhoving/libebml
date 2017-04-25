@@ -111,7 +111,7 @@
 # endif
 #endif
 
-#ifdef __GNUC__
+#if defined(__GNUC__) || (defined(_MSC_VER) && (_MSC_VER >= 1800))
 #define EBML_PRETTYLONGINT(c) (c ## ll)
 #else // __GNUC__
 #define EBML_PRETTYLONGINT(c) (c)
