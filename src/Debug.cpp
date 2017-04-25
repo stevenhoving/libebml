@@ -36,9 +36,7 @@
 */
 #include <stdio.h>
 
-#ifdef WIN32
-#include <windows.h> // For OutputDebugString
-#else
+#ifndef WIN32
 #include <time.h>
 #include <sys/time.h>
 #endif // WIN32
