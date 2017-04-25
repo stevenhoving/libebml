@@ -47,13 +47,13 @@
 START_LIBEBML_NAMESPACE
 
 WinIOCallback::WinIOCallback(const char* Path, const open_mode aMode, DWORD dwFlags)
-  :mFile(NULL), mOk(false)
+  :mOk(false), mLastErrorStr(), mCurrentPosition(0), mFile(NULL)
 {
   mOk = open(Path, aMode, dwFlags);
 }
 
 WinIOCallback::WinIOCallback(const wchar_t* Path, const open_mode aMode, DWORD dwFlags)
-  :mFile(NULL), mOk(false)
+  :mOk(false), mLastErrorStr(), mCurrentPosition(0), mFile(NULL)
 {
   mOk = open(Path, aMode, dwFlags);
 }
