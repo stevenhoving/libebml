@@ -52,8 +52,8 @@ public:
   WinIOCallback(const char* Path, const open_mode aMode, DWORD dwFlags=0);
   virtual ~WinIOCallback();
 
-  bool open(const wchar_t* Path, const open_mode Mode, DWORD dwFlags=0);
-  bool open(const char* Path, const open_mode Mode, DWORD dwFlags=0);
+  bool open(const wchar_t* Path, const open_mode aMode, DWORD dwFlags=0);
+  bool open(const char* Path, const open_mode aMode, DWORD dwFlags=0);
 
   virtual uint32 read(void*Buffer,size_t Size);
   virtual size_t write(const void*Buffer,size_t Size);
